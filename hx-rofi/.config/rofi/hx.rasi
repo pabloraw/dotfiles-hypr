@@ -1,0 +1,206 @@
+/* hx :: rofi — tema terminal fósforo verde
+ * Sirve para drun/run/window y para -dmenu (powermenu, clipboard, keybinds).
+ */
+
+* {
+    /* paleta hx */
+    bg:       #000000;
+    bg-alt:   #030b05;
+    bg-hl:    #0a1f0f;
+    dim:      #0f5c26;
+    mid:      #00a82d;
+    fg:       #00ff41;
+    bright:   #9dffb0;
+    warn:     #ffb000;
+    crit:     #ff3131;
+
+    font:              "JetBrainsMono Nerd Font 11";
+    background-color:  transparent;
+    text-color:        @fg;
+    border-color:      @fg;
+    border-radius:     0;
+    margin:            0;
+    padding:           0;
+    spacing:           0;
+}
+
+/* ventana centrada, borde verde 2px, sin radios */
+window {
+    location:          center;
+    anchor:            center;
+    width:             640px;
+    background-color:  @bg;
+    border:            2px solid;
+    border-color:      @fg;
+    padding:           0;
+}
+
+mainbox {
+    children:          [ inputbar, message, listview, mode-switcher ];
+    spacing:           0;
+    padding:           0;
+}
+
+/* barra de entrada: "hx@run:~$ consulta█" */
+inputbar {
+    children:          [ prompt, entry, num-filtered-rows, textbox-sep, num-rows ];
+    background-color:  @bg-alt;
+    border:            0 0 1px 0;
+    border-color:      @dim;
+    padding:           10px 12px;
+    spacing:           8px;
+}
+
+prompt {
+    text-color:        @fg;
+}
+
+/* prompt genérico para -dmenu sin -p */
+textbox-prompt-colon {
+    expand:            false;
+    str:               ">";
+    text-color:        @fg;
+}
+
+entry {
+    text-color:        @bright;
+    cursor:            text;
+    cursor-color:      @fg;
+    cursor-width:      9px;          /* cursor de bloque */
+    placeholder:       "_";
+    placeholder-color: @dim;
+}
+
+num-filtered-rows, num-rows {
+    expand:            false;
+    text-color:        @dim;
+}
+
+textbox-sep {
+    expand:            false;
+    str:               "/";
+    text-color:        @dim;
+}
+
+/* mensajes (-mesg) */
+message {
+    border:            0 0 1px 0;
+    border-color:      @dim;
+    padding:           6px 12px;
+    background-color:  @bg;
+}
+
+textbox {
+    text-color:        @mid;
+    background-color:  transparent;
+}
+
+/* lista de resultados */
+listview {
+    lines:             10;
+    columns:           1;
+    fixed-height:      false;
+    dynamic:           true;
+    cycle:             true;
+    scrollbar:         true;
+    padding:           6px 0;
+    spacing:           0;
+}
+
+scrollbar {
+    handle-width:      2px;
+    handle-color:      @fg;
+    background-color:  @bg-hl;
+    margin:            0 2px 0 0;
+}
+
+/* icono + nombre; en dmenu los iconos Nerd Font van dentro del texto */
+element {
+    children:          [ element-icon, element-text ];
+    orientation:       horizontal;
+    padding:           4px 12px;
+    spacing:           10px;
+    background-color:  transparent;
+    text-color:        @mid;
+}
+
+element-icon {
+    size:              24px;
+    background-color:  transparent;
+    vertical-align:    0.5;
+}
+
+element-text {
+    background-color:  transparent;
+    text-color:        inherit;
+    highlight:         bold #9dffb0;
+    vertical-align:    0.5;
+}
+
+/* filas normales / alternas */
+element normal.normal,
+element alternate.normal {
+    background-color:  transparent;
+    text-color:        @mid;
+}
+
+/* urgente y activo en ámbar */
+element normal.urgent,
+element alternate.urgent {
+    background-color:  transparent;
+    text-color:        @crit;
+}
+
+element normal.active,
+element alternate.active {
+    background-color:  transparent;
+    text-color:        @warn;
+}
+
+/* seleccionado: vídeo inverso tipo terminal */
+element selected.normal {
+    background-color:  @fg;
+    text-color:        @bg;
+}
+
+element selected.urgent {
+    background-color:  @crit;
+    text-color:        @bg;
+}
+
+element selected.active {
+    background-color:  @warn;
+    text-color:        @bg;
+}
+
+element selected element-text {
+    highlight:         bold underline #000000;
+}
+
+/* selector de modos: [drun] [run] [window] */
+mode-switcher {
+    border:            1px 0 0 0;
+    border-color:      @dim;
+    background-color:  @bg-alt;
+    padding:           4px 8px;
+    spacing:           4px;
+}
+
+button {
+    padding:           2px 8px;
+    text-color:        @dim;
+    background-color:  transparent;
+}
+
+button selected {
+    text-color:        @bg;
+    background-color:  @fg;
+}
+
+/* errores */
+error-message {
+    background-color:  @bg;
+    border:            2px solid;
+    border-color:      @crit;
+    padding:           12px;
+}
