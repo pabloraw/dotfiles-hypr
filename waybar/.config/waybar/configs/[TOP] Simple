@@ -29,7 +29,8 @@
 
 "modules-center": [
 	"clock#5",
-	"group/notify",
+	"custom/swaync",
+	"custom/dot_update#s",
 	],
 
 "modules-right": [

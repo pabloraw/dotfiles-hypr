@@ -153,6 +153,13 @@
 		"escape": false
 	},
 
+	// Fijo junto a las notificaciones (antes en un desplegable que movía el bloque central)
+	"custom/dot_update#s": {
+		"format": "󰁈",
+		"tooltip-format": "Buscar actualizaciones de los dotfiles de JaKooLit",
+		"on-click": "$HOME/.config/hypr/scripts/KooLsDotsUpdate.sh"
+	},
+
 	"custom/power#s": {
 		"format": "󰐥",
 		"tooltip-format": "Apagar, reiniciar, bloquear...\nClic derecho: cambiar desenfoque",

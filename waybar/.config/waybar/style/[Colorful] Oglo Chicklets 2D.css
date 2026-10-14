@@ -357,6 +357,7 @@ label:focus {
 }
 
 /* Botones sueltos: chicklet neutra; el color va en el icono */
+#custom-dot_update.s,
 #custom-nightlight.s,
 #custom-power.s {
     background-color: #343f44;
@@ -364,6 +365,7 @@ label:focus {
     padding-right: 9px;
 }
 
+#custom-dot_update.s,
 #custom-nightlight.s {
     color: #d3c6aa;
 }
