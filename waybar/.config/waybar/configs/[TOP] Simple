@@ -30,7 +30,6 @@
 "modules-center": [
 	"clock#5",
 	"custom/swaync",
-	"custom/dot_update#s",
 	],
 
 "modules-right": [
