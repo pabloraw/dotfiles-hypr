@@ -1,0 +1,235 @@
+/* HX :: waybar fósforo verde
+   Paleta: bg #000000 · bg-alt #030b05 · bg-hl #0a1f0f · dim #0f5c26
+           mid #00a82d · fg #00ff41 · bright #9dffb0 · warn #ffb000 · crit #ff3131 */
+
+@define-color bgalt  #030b05;
+@define-color bghl   #0a1f0f;
+@define-color dim    #0f5c26;
+@define-color mid    #00a82d;
+@define-color fg     #00ff41;
+@define-color bright #9dffb0;
+@define-color warn   #ffb000;
+@define-color crit   #ff3131;
+
+/* reset: sin radios, sin sombras heredadas del tema GTK */
+* {
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 12px;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+/* franja única con borde inferior verde */
+window#waybar {
+  background: alpha(@bgalt, 0.92);
+  color: @fg;
+  border-bottom: 1px solid @dim;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+/* base común de todos los módulos */
+#custom-prompt,
+#workspaces,
+#window,
+#clock,
+#custom-playerctl,
+#cpu,
+#memory,
+#temperature,
+#network,
+#pulseaudio,
+#custom-weather,
+#tray,
+#custom-notify,
+#custom-power {
+  padding: 0 10px;
+  margin: 0;
+  color: @fg;
+  background: transparent;
+}
+
+/* separadores │ sutiles entre módulos de la derecha */
+#cpu,
+#memory,
+#temperature,
+#network,
+#pulseaudio,
+#custom-weather,
+#tray,
+#custom-notify,
+#custom-power {
+  border-left: 1px solid @dim;
+}
+
+/* reproductor en verde secundario (se oculta solo si no hay nada) */
+#custom-playerctl {
+  color: @mid;
+}
+
+/* hover genérico */
+#custom-prompt:hover,
+#clock:hover,
+#custom-playerctl:hover,
+#cpu:hover,
+#memory:hover,
+#temperature:hover,
+#network:hover,
+#pulseaudio:hover,
+#custom-weather:hover,
+#custom-notify:hover,
+#custom-power:hover {
+  background: @bghl;
+  color: @bright;
+}
+
+/* --- izquierda ----------------------------------------------------------- */
+
+#custom-prompt {
+  color: @fg;
+  font-weight: bold;
+  padding-right: 6px;
+}
+
+#workspaces {
+  padding: 0 4px;
+  border-left: 1px solid @dim;
+  border-right: 1px solid @dim;
+}
+
+#workspaces button {
+  padding: 0 5px;
+  margin: 0;
+  color: @mid;
+  background: transparent;
+  transition: none;
+}
+
+/* vacíos: apagados */
+#workspaces button.empty {
+  color: @dim;
+}
+
+/* activo: verde brillante sobre fondo resaltado, subrayado tipo cursor */
+#workspaces button.active {
+  color: @bright;
+  background: @bghl;
+  font-weight: bold;
+  box-shadow: inset 0 -2px @fg;
+}
+
+#workspaces button.urgent {
+  color: @crit;
+  box-shadow: inset 0 -2px @crit;
+}
+
+#workspaces button:hover {
+  background: @bghl;
+  color: @bright;
+}
+
+#window {
+  color: @mid;
+}
+
+window#waybar.empty #window {
+  background: transparent;
+}
+
+/* --- centro -------------------------------------------------------------- */
+
+#clock {
+  color: @fg;
+  font-weight: bold;
+}
+
+/* --- derecha ------------------------------------------------------------- */
+
+#custom-playerctl.paused {
+  color: @dim;
+}
+
+#pulseaudio.muted,
+#network.disconnected,
+#network.linked,
+#custom-notify.dnd-none,
+#custom-notify.dnd-notification {
+  color: @dim;
+}
+
+#custom-weather {
+  color: @mid;
+}
+
+#custom-notify.notification,
+#custom-notify.inhibited-notification {
+  color: @warn;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background: @bghl;
+}
+
+#custom-power {
+  color: @fg;
+  padding: 0 8px;
+}
+
+#custom-power:hover {
+  color: @crit;
+}
+
+/* estados de métricas */
+#cpu.warning,
+#memory.warning,
+#temperature.warning {
+  color: @warn;
+}
+
+@keyframes blink {
+  to {
+    opacity: 0.35;
+  }
+}
+
+#cpu.critical,
+#memory.critical,
+#temperature.critical {
+  color: @crit;
+  animation: blink 0.8s steps(2) infinite alternate;
+}
+
+/* --- tooltips y menús ---------------------------------------------------- */
+
+tooltip {
+  background: #000000;
+  border: 1px solid @fg;
+  border-radius: 0;
+}
+
+tooltip label {
+  color: @fg;
+  padding: 2px 4px;
+}
+
+menu,
+#tray menu {
+  background: #000000;
+  border: 1px solid @dim;
+  color: @fg;
+}
+
+menuitem:hover {
+  background: @bghl;
+  color: @bright;
+}

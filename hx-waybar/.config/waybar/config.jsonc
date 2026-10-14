@@ -1,0 +1,201 @@
+// HX :: waybar fósforo verde (Waybar 0.14)
+// Una sola barra arriba en cada monitor; config autocontenida (sin include).
+// Iconos Nerd Font en verde brillante (#9dffb0) vía <span>; valores en verde normal (CSS).
+{
+  "layer": "top",
+  "position": "top",
+  "height": 28,
+  "spacing": 0,
+  "exclusive": true,
+  "reload_style_on_change": true,
+
+  "modules-left": ["custom/prompt", "hyprland/workspaces", "hyprland/window"],
+  "modules-center": ["clock"],
+  "modules-right": [
+    "custom/playerctl",
+    "cpu",
+    "memory",
+    "temperature",
+    "network",
+    "pulseaudio",
+    "custom/weather",
+    "tray",
+    "custom/notify",
+    "custom/power"
+  ],
+
+  // --- izquierda ---------------------------------------------------------
+
+  // prompt estático; clic = lanzador
+  "custom/prompt": {
+    "format": "<span color='#9dffb0'></span> hx@hypr:~$",
+    "tooltip-format": "> rofi drun",
+    "on-click": "rofi -show drun"
+  },
+
+  // número + iconos de las apps abiertas; cada barra solo ve su monitor
+  "hyprland/workspaces": {
+    "all-outputs": false,
+    "show-special": false,
+    "format": "{name}<span color='#9dffb0'>{windows}</span>",
+    "format-window-separator": "",
+    // \uXXXX = iconos Nerd Font del área privada BMP (escapados para que no se pierdan)
+    "window-rewrite-default": " ",
+    "window-rewrite": {
+      "class<kitty>": " ",
+      "class<[Gg]oogle-chrome.*>": " ",
+      "class<chromium.*>": " ",
+      "class<firefox>": " ",
+      "class<[Tt]hunar>": " ",
+      "class<[Cc]ode|code-oss|[Cc]ursor>": " 󰨞",
+      "class<[Ss]potify>": " ",
+      "class<discord|[Vv]esktop>": " ",
+      "class<[Tt]elegram.*|org.telegram.desktop>": " ",
+      "class<steam>": " ",
+      "class<pavucontrol|org.pulseaudio.pavucontrol>": " 󰕾",
+      "class<[Bb]lender>": " 󰂫",
+      "class<obsidian>": " 󰠮",
+      "class<mpv|vlc>": " "
+    },
+    "on-scroll-up": "hyprctl dispatch workspace e-1",
+    "on-scroll-down": "hyprctl dispatch workspace e+1",
+    "persistent-workspaces": {
+      "HDMI-A-1": [1, 2, 3, 4, 5],
+      "DP-1": [6, 7, 8, 9, 10]
+    }
+  },
+
+  "hyprland/window": {
+    "format": "{title}",
+    "max-length": 60,
+    "separate-outputs": true,
+    "icon": false,
+    "swap-icon-label": false
+  },
+
+  // --- centro ------------------------------------------------------------
+
+  // {0:..} repite el mismo argumento (fmt no admite dos {} automáticos)
+  "clock": {
+    "interval": 1,
+    "format": "<span color='#9dffb0'>󰃭</span> [ {0:%d-%m-%Y} ][ <span color='#9dffb0'></span> {0:%H:%M:%S} ]",
+    "tooltip-format": "<tt>{calendar}</tt>",
+    "calendar": {
+      "mode": "month",
+      "weeks-pos": "left",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#9dffb0'><b>{}</b></span>",
+        "weekdays": "<span color='#00a82d'>{}</span>",
+        "weeks": "<span color='#0f5c26'>{}</span>",
+        "days": "<span color='#00ff41'>{}</span>",
+        "today": "<span background='#00ff41' color='#000000'><b>{}</b></span>"
+      }
+    },
+    "actions": {
+      "on-scroll-up": "shift_down",
+      "on-scroll-down": "shift_up",
+      "on-click-right": "mode"
+    }
+  },
+
+  // --- derecha: métricas -------------------------------------------------
+
+  // reproductor en streaming (-F); el módulo se oculta si no hay nada
+  "custom/playerctl": {
+    "return-type": "json",
+    "max-length": 45,
+    "format": "<span color='#9dffb0'>{icon}</span> {}",
+    "format-icons": { "Playing": "", "Paused": "", "Stopped": "" },
+    "exec": "playerctl -a metadata --format '{\"text\": \"{{markup_escape(artist)}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} :: {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{lc(status)}}\"}' -F",
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl next",
+    "on-click-middle": "playerctl previous"
+  },
+
+  "cpu": {
+    "interval": 2,
+    "format": "<span color='#9dffb0'></span> {usage:02}%",
+    "states": { "warning": 70, "critical": 90 },
+    "on-click": "kitty -e btop"
+  },
+
+  "memory": {
+    "interval": 5,
+    "format": "<span color='#9dffb0'>󰍛</span> {used:0.1f}G",
+    "tooltip-format": "ram {used:0.1f}G / {total:0.1f}G\nswap {swapUsed:0.1f}G",
+    "states": { "warning": 75, "critical": 90 }
+  },
+
+  // coretemp por ruta estable (el número de hwmon cambia entre arranques)
+  "temperature": {
+    "interval": 5,
+    "hwmon-path-abs": "/sys/devices/platform/coretemp.0/hwmon",
+    "input-filename": "temp1_input",
+    "warning-threshold": 70,
+    "critical-threshold": 85,
+    "format": "<span color='#9dffb0'></span> {temperatureC}°",
+    "tooltip-format": "cpu package {temperatureC}°C"
+  },
+
+  "network": {
+    "interval": 2,
+    "format-wifi": "<span color='#9dffb0'>󰖩</span> {essid}",
+    "format-ethernet": "<span color='#9dffb0'>󰈀</span> ↓{bandwidthDownBytes} ↑{bandwidthUpBytes}",
+    "format-linked": "<span color='#9dffb0'>󰈂</span> sin ip",
+    "format-disconnected": "<span color='#ff3131'>󰖪</span> off",
+    "tooltip-format": "{ifname} {ipaddr}/{cidr}\n↓{bandwidthDownBytes} ↑{bandwidthUpBytes}",
+    "tooltip-format-wifi": "{essid} {signalStrength}%\n{ifname} {ipaddr}/{cidr}\n↓{bandwidthDownBytes} ↑{bandwidthUpBytes}",
+    "on-click-right": "nm-connection-editor"
+  },
+
+  "pulseaudio": {
+    "format": "<span color='#9dffb0'>{icon}</span> {volume}%",
+    "format-muted": "<span color='#0f5c26'>󰖁</span> mute",
+    "format-icons": { "headphone": "", "default": ["󰕿", "󰖀", "󰕾"] },
+    "scroll-step": 5,
+    "on-click": "pavucontrol",
+    "on-click-right": "~/.config/hypr/scripts/volume.sh mute",
+    "tooltip-format": "{desc}"
+  },
+
+  // temperatura exterior en texto; si falla la red queda vacío y se oculta
+  "custom/weather": {
+    "format": "<span color='#9dffb0'>󰖕</span> {}",
+    "interval": 1800,
+    "exec": "curl -sf --max-time 5 'https://wttr.in/?format=%t' | sed 's/+//' || true",
+    "tooltip": false
+  },
+
+  "tray": {
+    "icon-size": 14,
+    "spacing": 8
+  },
+
+  // swaync: -swb = escucha continua en json; la clase indica el estado
+  "custom/notify": {
+    "return-type": "json",
+    "exec": "swaync-client -swb",
+    "format": "{icon} {}",
+    "format-icons": {
+      "notification": "<span color='#ffb000'>󰂞</span>",
+      "none": "<span color='#9dffb0'>󰂚</span>",
+      "dnd-notification": "<span color='#ffb000'>󰂛</span>",
+      "dnd-none": "<span color='#0f5c26'>󰂛</span>",
+      "inhibited-notification": "<span color='#ffb000'>󰂞</span>",
+      "inhibited-none": "<span color='#9dffb0'>󰂚</span>",
+      "dnd-inhibited-notification": "<span color='#ffb000'>󰂛</span>",
+      "dnd-inhibited-none": "<span color='#0f5c26'>󰂛</span>"
+    },
+    "tooltip-format": "{} notificaciones · clic: panel · der: no molestar",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+
+  "custom/power": {
+    "format": "[⏻]",
+    "tooltip-format": "> powermenu",
+    "on-click": "~/.config/hypr/scripts/powermenu.sh"
+  }
+}
