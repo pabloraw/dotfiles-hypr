@@ -85,7 +85,8 @@
 			"custom/weather",
 			"network#s",
 			"bluetooth#s",
-			"group/audio#s"
+			"pulseaudio#s",
+			"pulseaudio#mic"
 		]
 	},
 	"network#s": {
@@ -114,19 +115,6 @@
 		"tooltip-format-enumerate-connected-battery": "  {device_alias} ({device_battery_percentage}%)",
 		"on-click": "blueman-manager"
 	},
-	// Volumen; al pasar el ratón aparece el micrófono
-	"group/audio#s": {
-		"orientation": "horizontal",
-		"drawer": {
-			"transition-duration": 300,
-			"children-class": "mic-child",
-			"transition-left-to-right": true
-		},
-		"modules": [
-			"pulseaudio#s",
-			"pulseaudio#mic"
-		]
-	},
 	"pulseaudio#s": {
 		"format": "<span color='#E8A847'>{icon}</span> {volume}%",
 		"format-bluetooth": "<span color='#E8A847'>󰋋</span> {volume}%",
@@ -145,7 +133,7 @@
 	"pulseaudio#mic": {
 		"format": "{format_source}",
 		"format-source": "<span color='#E8A847'>󰍬</span> {volume}%",
-		"format-source-muted": "<span color='#7a8478'>󰍭</span>",
+		"format-source-muted": "<span color='#7a8478'>󰍭</span> {volume}%",
 		"scroll-step": 5,
 		"tooltip-format": "Micrófono: {source_volume}% ({source_desc})\nClic: silenciar · Rueda: subir/bajar\nClic derecho: mezclador",
 		"on-click": "$HOME/.config/hypr/scripts/Volume.sh --toggle-mic",
