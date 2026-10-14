@@ -182,6 +182,14 @@
 	"format-window-separator": " ",
 	"window-rewrite-default": " ",
 	"window-rewrite": {		
+		// Logos propios (fuente WaybarIcons, generada en fonts-src/): solo en Chrome
+		"class<google-chrome> title<.*Claude.*>": "􀀁 ",
+		"class<google-chrome> title<.*Todoist.*>": "􀀂 ",
+		"class<google-chrome> title<.*Notion.*>": "􀀃 ",
+		"class<google-chrome> title<.*Supabase.*>": "􀀄 ",
+		"class<google-chrome> title<.*Vercel.*>": "􀀅 ",
+		"class<google-chrome> title<.*([Cc]risopa|localhost:4000).*>": "􀀆 ",
+
 		"title<.*amazon.*>": " ",
 		"title<.*reddit.*>": " ",
 

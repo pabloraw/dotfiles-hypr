@@ -2,7 +2,7 @@
 /* Oglo Chicklets 2D - versión plana sin efecto 3D */
 
 * {
-    font-family: "JetBrainsMono Nerd Font", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-family: "JetBrainsMono Nerd Font", "Waybar Icons", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
     font-size: 13px;
     font-weight: bold;
 }

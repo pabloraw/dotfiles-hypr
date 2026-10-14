@@ -75,6 +75,13 @@ KeyHints.sh           # Mostrar atajos de teclado
 ClipManager.sh        # Gestor de portapapeles
 ```
 
+### Iconos propios de Waybar (fuente `Waybar Icons`)
+
+Logos que no existen en Nerd Fonts (Claude, Todoist, Notion, Supabase, Vercel, Crisopa) se compilan a una fuente propia:
+- Fuentes SVG en `fonts-src/svg/` (relleno, viewBox 24×24; los de trazo de Lucide se pasan a relleno con Inkscape, ver `fonts-src/build.py`)
+- `python3 fonts-src/build.py` genera `fonts/.local/share/fonts/WaybarIcons.otf` (paquete stow `fonts`), luego `fc-cache -f` y reiniciar waybar
+- Códigos en el plano privado U+100001+; las reglas están en `ModulesWorkspaces` (`window-rewrite`, solo para Chrome)
+
 ## Notas de Desarrollo
 
 - Los scripts usan `$HOME/.config/hypr/` como ruta base
