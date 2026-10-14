@@ -194,7 +194,7 @@
 		"class<tor browser>": " ",
 		"class<firefox-developer-edition>": "🦊 ",
 
-		"class<kitty|konsole|[Aa]lacritty>": " ",
+		"class<kitty|konsole|[Aa]lacritty>": " ",
 		"class<kitty-dropterm>": " ",
 		"class<com.mitchellh.ghostty>": " ",
 		"class<org.wezfurlong.wezterm>": " ",

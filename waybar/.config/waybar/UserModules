@@ -5,6 +5,54 @@
 /* this file along with the unique configs and styles. */
 /* IMPORTANT, be mindful with , or ". else waybar will not start */
 
+// Barra Simple: métricas agrupadas con icono delante (estilo en Oglo Chicklets 2D.css)
 {
-
+	"idle_inhibitor#s": {
+		"format": "{icon}",
+		"format-icons": {
+			"activated": "󰅶",
+			"deactivated": "󰛊"
+		},
+		"tooltip-format-activated": "Pantalla siempre encendida: ACTIVADO\nNo se bloquea ni suspende\nClic: desactivar",
+		"tooltip-format-deactivated": "Pantalla siempre encendida: desactivado\nClic: evitar bloqueo y suspensión"
+	},
+	"group/stats": {
+		"orientation": "horizontal",
+		"modules": [
+			"cpu#s",
+			"memory#s",
+			"disk#s",
+			"temperature#s"
+		]
+	},
+	"cpu#s": {
+		"interval": 2,
+		"format": "<span color='#E8A847'>󰍛</span> {usage}%",
+		"tooltip": true,
+		"on-click-right": "gnome-system-monitor"
+	},
+	"memory#s": {
+		"interval": 10,
+		"format": "<span color='#d980ad'>󰘚</span> {used:0.1f}G",
+		"tooltip-format": "Memoria RAM: {used:0.1f} de {total:0.1f} GB ({percentage}%)\nClic derecho: btop",
+		"on-click-right": "$HOME/.config/hypr/scripts/WaybarScripts.sh --btop"
+	},
+	"disk#s": {
+		"interval": 30,
+		"path": "/",
+		"format": "<span color='#c08552'>󰋊</span> {percentage_used}%",
+		"tooltip-format": "Disco (/): {used} de {total} ({percentage_used}%)"
+	},
+	"temperature#s": {
+		"interval": 10,
+		"hwmon-path": [
+			"/sys/class/hwmon/hwmon1/temp1_input",
+			"/sys/class/thermal/thermal_zone0/temp"
+		],
+		"critical-threshold": 82,
+		"format": "<span color='#f0932b'>󰔏</span> {temperatureC}°",
+		"format-critical": "<span color='#ee606a'>󰔏</span> {temperatureC}°",
+		"tooltip-format": "Temperatura CPU: {temperatureC} °C\nClic derecho: nvtop",
+		"on-click-right": "$HOME/.config/hypr/scripts/WaybarScripts.sh --nvtop"
+	}
 }

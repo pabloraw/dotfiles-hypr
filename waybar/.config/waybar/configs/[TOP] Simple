@@ -20,11 +20,8 @@
 "margin-top": 0,
 
 "modules-left": [
-	"idle_inhibitor",
-	"cpu",
-	"memory",
-	"disk",
-	"temperature",
+	"idle_inhibitor#s",
+	"group/stats",
 	"hyprland/workspaces#rw",
 	"custom/playerctl",
 	],

@@ -285,8 +285,36 @@ label:focus {
 }
 
 #idle_inhibitor.activated {
-    background-color: #ecf0f1;
-    color: #2d3436;
+    background-color: #E8A847;
+    color: #2d353b;
+}
+
+#idle_inhibitor.s {
+    color: #d3c6aa;
+    padding-left: 9px;
+    padding-right: 9px;
+}
+
+/* Métricas agrupadas: una sola chicklet neutra; cada métrica se distingue por el color de su icono */
+#stats {
+    background-color: #343f44;
+    border-radius: 6px;
+    margin: 2px 2px;
+    padding: 0 4px;
+}
+
+#stats #cpu,
+#stats #memory,
+#stats #disk,
+#stats #temperature {
+    background-color: transparent;
+    color: #d3c6aa;
+    margin: 0;
+    padding: 0 6px;
+}
+
+#stats #temperature.critical {
+    color: #ee606a;
 }
 
 #mpd {
