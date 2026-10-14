@@ -32,13 +32,10 @@
 	],
 
 "modules-right": [
-	"custom/weather",
-	"tray",
-	"network",
-	"bluetooth",
-	"group/audio",
-	"custom/nightlight",
-	"custom/power",
+	"group/apps",
+	"group/info",
+	"custom/nightlight#s",
+	"custom/power#s",
 	],
 }
 

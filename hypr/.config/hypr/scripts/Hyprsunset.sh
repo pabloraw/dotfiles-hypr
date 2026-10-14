@@ -4,16 +4,13 @@ set -euo pipefail
 # Hyprsunset toggle + Waybar status helper
 # Phase 1: manual toggle only (no scheduling)
 # Icons:
-# - Off: bright sun
-# - On: sunset icon if available, otherwise a blue sun
+# - Off: sol / On: luna (Nerd Font)
 #
 # Customize via env vars:
 #   HYPRSUNSET_TEMP   default 4500 (K)
-#   HYPRSUNSET_ICON_MODE  sunset|blue  (default: sunset)
 
 STATE_FILE="$HOME/.cache/.hyprsunset_state"
 TARGET_TEMP="${HYPRSUNSET_TEMP:-4500}"
-ICON_MODE="${HYPRSUNSET_ICON_MODE:-sunset}"
 
 ensure_state() {
   [[ -f "$STATE_FILE" ]] || echo "off" > "$STATE_FILE"
@@ -21,24 +18,13 @@ ensure_state() {
 
 # Render icons using pango markup to allow colorization
 icon_off() {
-  # universally available sun symbol
-  printf "☀"
+  # Nerd Font: sol (weather-sunny)
+  printf "󰖙"
 }
 
 icon_on() {
-  case "$ICON_MODE" in
-    sunset)
-      # sunset emoji (falls back to tofu if no emoji font)
-      printf "🌇"
-      ;;
-    blue)
-      # no color in text; rely on CSS .on to style if desired
-      printf "☀"
-      ;;
-    *)
-      printf "☀"
-      ;;
-  esac
+  # Nerd Font: luna (weather-night)
+  printf "󰖔"
 }
 
 cmd_toggle() {
@@ -60,14 +46,14 @@ if [[ "$state" == "on" ]]; then
       sleep 0.3 && pkill -x hyprsunset || true
     fi
     echo off > "$STATE_FILE"
-    notify-send -u low "Hyprsunset: Disabled" || true
+    notify-send -u low "Luz nocturna desactivada" || true
   else
     # Turning ON: start hyprsunset at target temp in background
     if command -v hyprsunset >/dev/null 2>&1; then
       nohup hyprsunset -t "$TARGET_TEMP" >/dev/null 2>&1 &
     fi
     echo on > "$STATE_FILE"
-    notify-send -u low "Hyprsunset: Enabled" "${TARGET_TEMP}K" || true
+    notify-send -u low "Luz nocturna activada" "${TARGET_TEMP} K" || true
   fi
 }
 
@@ -81,13 +67,13 @@ cmd_status() {
   fi
 
   if [[ "$onoff" == "on" ]]; then
-    txt="<span size='18pt'>$(icon_on)</span>"
+    txt="$(icon_on)"
     cls="on"
-    tip="Night light on @ ${TARGET_TEMP}K"
+    tip="Luz nocturna: ACTIVADA (${TARGET_TEMP} K)\\nClic o Super+N: desactivar"
   else
-    txt="<span size='16pt'>$(icon_off)</span>"
+    txt="$(icon_off)"
     cls="off"
-    tip="Night light off"
+    tip="Luz nocturna: desactivada\\nClic o Super+N: activar (pantalla más cálida)"
   fi
   printf '{"text":"%s","class":"%s","tooltip":"%s"}\n' "$txt" "$cls" "$tip"
 }

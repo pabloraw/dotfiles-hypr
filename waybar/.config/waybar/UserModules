@@ -54,5 +54,121 @@
 		"format-critical": "<span color='#ee606a'>󰔏</span> {temperatureC}°",
 		"tooltip-format": "Temperatura CPU: {temperatureC} °C\nClic derecho: nvtop",
 		"on-click-right": "$HOME/.config/hypr/scripts/WaybarScripts.sh --nvtop"
+	},
+
+	// Bandeja plegable: solo se ve la flecha; al pasar el ratón se despliegan las apps
+	"group/apps": {
+		"orientation": "horizontal",
+		"drawer": {
+			"transition-duration": 300,
+			"children-class": "tray-child",
+			"transition-left-to-right": false
+		},
+		"modules": [
+			"custom/tray-arrow",
+			"tray#s"
+		]
+	},
+	"custom/tray-arrow": {
+		"format": "󰅁",
+		"tooltip-format": "Apps en segundo plano (pasa el ratón para verlas)"
+	},
+	"tray#s": {
+		"icon-size": 16,
+		"spacing": 8
+	},
+
+	// Estado: tiempo, red, bluetooth y volumen en una chicklet neutra
+	"group/info": {
+		"orientation": "horizontal",
+		"modules": [
+			"custom/weather",
+			"network#s",
+			"bluetooth#s",
+			"group/audio#s"
+		]
+	},
+	"network#s": {
+		"interval": 5,
+		"format-ethernet": "<span color='#4DB6AC'>󰈀</span>",
+		"format-wifi": "<span color='#4DB6AC'>{icon}</span>",
+		"format-linked": "<span color='#E8A847'>󰈂</span>",
+		"format-disconnected": "<span color='#ee606a'>󰈂</span>",
+		"format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+		"tooltip-format-ethernet": "Red por cable ({ifname})\nIP: {ipaddr}\n󰁝 {bandwidthUpBytes}   󰁅 {bandwidthDownBytes}\nClic derecho: nmtui",
+		"tooltip-format-wifi": "Wi-Fi: {essid} ({signalStrength}%)\nIP: {ipaddr}\n󰁝 {bandwidthUpBytes}   󰁅 {bandwidthDownBytes}\nClic derecho: nmtui",
+		"tooltip-format-linked": "Cable conectado sin IP ({ifname})\nClic derecho: nmtui",
+		"tooltip-format-disconnected": "Sin conexión\nClic derecho: nmtui",
+		"on-click-right": "$HOME/.config/hypr/scripts/WaybarScripts.sh --nmtui"
+	},
+	"bluetooth#s": {
+		"format": "<span color='#7fbbb3'>󰂯</span>",
+		"format-disabled": "<span color='#7a8478'>󰂲</span>",
+		"format-off": "<span color='#7a8478'>󰂲</span>",
+		"format-connected": "<span color='#7fbbb3'>󰂱</span> {num_connections}",
+		"tooltip-format": "Bluetooth: encendido, nada conectado\nClic: gestor de Bluetooth",
+		"tooltip-format-disabled": "Bluetooth: apagado\nClic: gestor de Bluetooth",
+		"tooltip-format-off": "Bluetooth: apagado\nClic: gestor de Bluetooth",
+		"tooltip-format-connected": "Bluetooth: {num_connections} conectado(s)\n{device_enumerate}\nClic: gestor de Bluetooth",
+		"tooltip-format-enumerate-connected": "  {device_alias}",
+		"tooltip-format-enumerate-connected-battery": "  {device_alias} ({device_battery_percentage}%)",
+		"on-click": "blueman-manager"
+	},
+	// Volumen; al pasar el ratón aparece el micrófono
+	"group/audio#s": {
+		"orientation": "horizontal",
+		"drawer": {
+			"transition-duration": 300,
+			"children-class": "mic-child",
+			"transition-left-to-right": true
+		},
+		"modules": [
+			"pulseaudio#s",
+			"pulseaudio#mic"
+		]
+	},
+	"pulseaudio#s": {
+		"format": "<span color='#E8A847'>{icon}</span> {volume}%",
+		"format-bluetooth": "<span color='#E8A847'>󰋋</span> {volume}%",
+		"format-muted": "<span color='#7a8478'>󰝟</span> {volume}%",
+		"format-icons": {
+			"default": ["󰕿", "󰖀", "󰕾"]
+		},
+		"scroll-step": 5.0,
+		"smooth-scrolling-threshold": 1,
+		"tooltip-format": "Volumen: {volume}% ({desc})\nClic: silenciar · Rueda: subir/bajar\nClic derecho: mezclador",
+		"on-click": "$HOME/.config/hypr/scripts/Volume.sh --toggle",
+		"on-click-right": "pavucontrol -t 3",
+		"on-scroll-up": "$HOME/.config/hypr/scripts/Volume.sh --inc",
+		"on-scroll-down": "$HOME/.config/hypr/scripts/Volume.sh --dec"
+	},
+	"pulseaudio#mic": {
+		"format": "{format_source}",
+		"format-source": "<span color='#E8A847'>󰍬</span> {volume}%",
+		"format-source-muted": "<span color='#7a8478'>󰍭</span>",
+		"scroll-step": 5,
+		"tooltip-format": "Micrófono: {source_volume}% ({source_desc})\nClic: silenciar · Rueda: subir/bajar\nClic derecho: mezclador",
+		"on-click": "$HOME/.config/hypr/scripts/Volume.sh --toggle-mic",
+		"on-click-right": "pavucontrol -t 4",
+		"on-scroll-up": "$HOME/.config/hypr/scripts/Volume.sh --mic-inc",
+		"on-scroll-down": "$HOME/.config/hypr/scripts/Volume.sh --mic-dec"
+	},
+
+	// Luz nocturna (hyprsunset); el tooltip lo da el script
+	"custom/nightlight#s": {
+		"return-type": "json",
+		"exec": "$HOME/.config/hypr/scripts/Hyprsunset.sh status",
+		"interval": 3,
+		"format": "{text}",
+		"on-click": "$HOME/.config/hypr/scripts/Hyprsunset.sh toggle; pkill -RTMIN+9 waybar",
+		"signal": 9,
+		"escape": false
+	},
+
+	"custom/power#s": {
+		"format": "󰐥",
+		"tooltip-format": "Apagar, reiniciar, bloquear...\nClic derecho: cambiar desenfoque",
+		"on-click": "$HOME/.config/hypr/scripts/Wlogout.sh",
+		"on-click-right": "$HOME/.config/hypr/scripts/ChangeBlur.sh"
 	}
 }

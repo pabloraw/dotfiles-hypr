@@ -317,6 +317,72 @@ label:focus {
     color: #ee606a;
 }
 
+/* Parte derecha: misma idea que #stats */
+#info,
+#apps {
+    background-color: #343f44;
+    border-radius: 6px;
+    margin: 2px 2px;
+    padding: 0 4px;
+}
+
+#info #custom-weather,
+#info #network,
+#info #bluetooth,
+#info #pulseaudio {
+    background-color: transparent;
+    color: #d3c6aa;
+    margin: 0;
+    padding: 0 6px;
+}
+
+#info #pulseaudio.muted {
+    color: #7a8478;
+}
+
+/* Bandeja plegable */
+#custom-tray-arrow {
+    color: #7a8478;
+    padding: 0 4px;
+}
+
+#custom-tray-arrow:hover {
+    color: #d3c6aa;
+}
+
+#tray.s {
+    background-color: transparent;
+    margin: 0;
+    padding: 0 4px;
+}
+
+/* Botones sueltos: chicklet neutra; el color va en el icono */
+#custom-nightlight.s,
+#custom-power.s {
+    background-color: #343f44;
+    padding-left: 9px;
+    padding-right: 9px;
+}
+
+#custom-nightlight.s {
+    color: #d3c6aa;
+}
+
+#custom-nightlight.s.on {
+    background-color: #E8A847;
+    color: #2d353b;
+}
+
+#custom-power.s {
+    color: #ee606a;
+    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+
+#custom-power.s:hover {
+    background-color: #ee606a;
+    color: #2d353b;
+}
+
 #mpd {
     background-color: #66cc99;
     color: #2a5c45;
