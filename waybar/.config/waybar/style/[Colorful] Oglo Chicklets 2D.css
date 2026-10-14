@@ -3,7 +3,7 @@
 
 * {
     font-family: "JetBrainsMono Nerd Font", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
-    font-size: 97%;
+    font-size: 13px;
     font-weight: bold;
 }
 
@@ -23,7 +23,7 @@ button {
     background-color: #E8A847;
     color: #2d353b;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     padding-left: 15px;
     padding-right: 15px;
     margin: 2px 1px;
@@ -106,7 +106,7 @@ button.active {
     color: #ffffff;
     padding-top: 0px;
     padding-bottom: 0px;
-    border-radius: 5px;
+    border-radius: 6px;
     padding-left: 5px;
     padding-right: 5px;
     margin: 2px 2px;
@@ -194,7 +194,8 @@ label:focus {
 }
 
 #disk {
-    background-color: #964B00;
+    background-color: #c08552;
+    color: #2d353b;
 }
 
 #custom-lock,
@@ -207,9 +208,14 @@ label:focus {
     padding-right: 10px;
 }
 
-#network {
-    background-color: transparent;
-    padding-right: 10px;
+/* Módulos informativos: chicklet neutra, igual que #window */
+#network,
+#bluetooth,
+#custom-weather {
+    background-color: #343f44;
+    color: #d3c6aa;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 #network.disconnected {
@@ -251,6 +257,7 @@ label:focus {
 
 #temperature {
     background-color: #f0932b;
+    color: #2d353b;
 }
 
 #temperature.critical {
@@ -258,8 +265,10 @@ label:focus {
 }
 
 #tray {
-    background-color: #e67f51;
-    color: #2d353b;
+    background-color: #343f44;
+    color: #d3c6aa;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 #tray > .passive {
@@ -272,7 +281,7 @@ label:focus {
 }
 
 #idle_inhibitor {
-    background-color: #2d3436;
+    background-color: #343f44;
 }
 
 #idle_inhibitor.activated {

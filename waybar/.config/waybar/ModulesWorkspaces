@@ -241,6 +241,7 @@
 
 		"class<VSCode|code|code-url-handler|code-oss|codium|codium-url-handler|VSCodium>": "󰨞 ",
 		"class<dev.zed.Zed>": "󰵁",
+		"class<UnrealEditor>": "󰊴 ",
 		"class<codeblocks>": "󰅩 ",
 		"title<.*github.*>": " ",
 		"class<mousepad>": " ",

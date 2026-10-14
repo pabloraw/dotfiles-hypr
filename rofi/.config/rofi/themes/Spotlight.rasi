@@ -16,7 +16,8 @@ configuration {
 @theme "~/.config/rofi/wallust/colors-rofi.rasi"
 
 * {
-    selected:                    @color12;
+    /* Acento fijo de la barra (no de wallust) */
+    selected:                    #E8A847;
     text-color:                  @foreground;
 }
 
@@ -29,7 +30,7 @@ window {
     width:                       580px;
     border:                      0px;
     border-radius:               8px;
-    background-color:            @background;
+    background-color:            rgba(35,42,46,0.96);
     cursor:                      "default";
 }
 
@@ -47,7 +48,7 @@ inputbar {
     padding:                     14px 16px;
     margin:                      0px 0px 8px 0px;
     border:                      0px;
-    border-radius:               12px;
+    border-radius:               6px;
     background-color:            rgba(255,255,255,0.08);
     text-color:                  @foreground;
     children:                    [ "textbox-prompt-colon", "prompt", "entry" ];
@@ -96,7 +97,7 @@ element {
     spacing:                     12px;
     padding:                     10px 14px;
     border:                      0px;
-    border-radius:               10px;
+    border-radius:               6px;
     background-color:            transparent;
     text-color:                  @foreground;
     cursor:                      pointer;
@@ -110,7 +111,7 @@ element alternate.normal {
 
 element selected.normal {
     background-color:            @selected;
-    text-color:                  #ffffff;
+    text-color:                  #2d353b;
 }
 
 element-icon {
@@ -134,7 +135,7 @@ message {
 }
 textbox {
     padding:                     12px;
-    border-radius:               10px;
+    border-radius:               6px;
     background-color:            rgba(255,255,255,0.06);
     text-color:                  @foreground;
     vertical-align:              0.5;
@@ -142,7 +143,7 @@ textbox {
 }
 error-message {
     padding:                     12px;
-    border-radius:               10px;
+    border-radius:               6px;
     background-color:            rgba(255,255,255,0.06);
     text-color:                  @foreground;
 }
