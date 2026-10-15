@@ -17,7 +17,7 @@ button {
     background-size: 30%;
     /* mismo ancho para todas (el texto no las estira) */
     min-width: 150px;
-    border: 2px solid transparent;
+    border: none;
     border-radius: 8px;
     margin: 6px;
     outline-style: none;
@@ -25,9 +25,14 @@ button {
     transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
 }
 
-/* Foco de teclado (flechas): solo borde, para no parecer seleccionado al abrir */
+/* Foco de teclado: GTK3 solo pinta el outline tras usar el teclado (flechas/Tab),
+   así que al abrir no aparece ninguna tarjeta marcada */
 button:focus {
-    border-color: #E8A847;
+    outline-style: solid;
+    outline-width: 2px;
+    outline-offset: -2px;
+    outline-color: #E8A847;
+    -gtk-outline-radius: 8px;
 }
 
 button:hover {
@@ -40,7 +45,7 @@ button:hover {
 }
 
 #shutdown:focus {
-    border-color: #ee606a;
+    outline-color: #ee606a;
 }
 
 #lock     { background-image: image(url("./icons/lock.svg")); }
