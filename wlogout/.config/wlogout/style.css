@@ -1,0 +1,56 @@
+/* wlogout: tarjetas neutras como las chicklets de la barra.
+   Iconos Lucide en icons/ (normal claro, -hover oscuro). Paleta fija, no wallust. */
+
+window {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 13pt;
+    font-weight: bold;
+    color: #d3c6aa;
+    background-color: rgba(35, 42, 46, 0.85);
+}
+
+button {
+    color: #d3c6aa;
+    background-color: #343f44;
+    background-repeat: no-repeat;
+    background-position: center 42%;
+    background-size: 30%;
+    /* mismo ancho para todas (el texto no las estira) */
+    min-width: 150px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    margin: 6px;
+    outline-style: none;
+    box-shadow: none;
+    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+
+/* Foco de teclado (flechas): solo borde, para no parecer seleccionado al abrir */
+button:focus {
+    border-color: #E8A847;
+}
+
+button:hover {
+    background-color: #E8A847;
+    color: #232a2e;
+}
+
+#shutdown:hover {
+    background-color: #ee606a;
+}
+
+#shutdown:focus {
+    border-color: #ee606a;
+}
+
+#lock     { background-image: image(url("./icons/lock.svg")); }
+#suspend  { background-image: image(url("./icons/suspend.svg")); }
+#logout   { background-image: image(url("./icons/logout.svg")); }
+#reboot   { background-image: image(url("./icons/reboot.svg")); }
+#shutdown { background-image: image(url("./icons/shutdown.svg")); }
+
+#lock:hover     { background-image: image(url("./icons/lock-hover.svg")); }
+#suspend:hover  { background-image: image(url("./icons/suspend-hover.svg")); }
+#logout:hover   { background-image: image(url("./icons/logout-hover.svg")); }
+#reboot:hover   { background-image: image(url("./icons/reboot-hover.svg")); }
+#shutdown:hover { background-image: image(url("./icons/shutdown-hover.svg")); }
