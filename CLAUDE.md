@@ -10,13 +10,13 @@ Dotfiles para Hyprland gestionados con GNU Stow. Cada aplicación es un paquete 
 
 ```bash
 # Instalar todos los paquetes
-stow -t ~ hypr waybar rofi kitty
+stow -t ~ hypr waybar rofi kitty swaync fonts
 
 # Instalar un paquete específico
 stow -t ~ hypr
 
 # Desinstalar paquetes
-stow -t ~ -D hypr waybar rofi kitty
+stow -t ~ -D hypr waybar rofi kitty swaync fonts
 
 # Simular instalación (dry-run)
 stow -t ~ -n hypr

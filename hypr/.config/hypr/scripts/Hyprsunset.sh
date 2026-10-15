@@ -46,14 +46,12 @@ if [[ "$state" == "on" ]]; then
       sleep 0.3 && pkill -x hyprsunset || true
     fi
     echo off > "$STATE_FILE"
-    notify-send -u low "Luz nocturna desactivada" || true
   else
     # Turning ON: start hyprsunset at target temp in background
     if command -v hyprsunset >/dev/null 2>&1; then
       nohup hyprsunset -t "$TARGET_TEMP" >/dev/null 2>&1 &
     fi
     echo on > "$STATE_FILE"
-    notify-send -u low "Luz nocturna activada" "${TARGET_TEMP} K" || true
   fi
 }
 

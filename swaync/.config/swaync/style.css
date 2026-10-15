@@ -1,0 +1,357 @@
+/* ----------- 💫 https://github.com/JaKooLit 💫 -------- */
+/* swaync colors - wallust from waybar.css */
+
+@import '../../.config/waybar/wallust/colors-waybar.css';
+
+/* Acento y fondo fijos de la barra (no de wallust) */
+@define-color noti-border-color #E8A847;
+@define-color noti-bg #232a2e;
+@define-color noti-bg-alt @background-alt;
+@define-color noti-bg-hover @background;
+@define-color text-color @foreground;
+
+* {
+    font-family: "Ubuntu Sans", "JetBrains Mono Nerd Font";
+    font-weight: normal;
+    font-size: 1rem;
+}
+
+.control-center .notification-row:focus,
+.control-center .notification-row:hover {
+    opacity: 1;
+    background: @noti-bg;
+    border-radius: 6px
+}
+
+.notification-row {
+    outline: none;
+}
+
+.notification {
+    background: @noti-bg;
+    padding: 0;
+    border-radius: 8px;
+    /* Borde en el contenedor exterior, no en la acción interior (evita el marco dentro del marco).
+       Neutro; solo las críticas llevan color */
+    border: 1px solid #343f44;
+}
+
+.notification.critical {
+    border-color: #ee606a;
+}
+
+.notification-default-action {
+    margin: 0;
+    padding: 8px 14px 8px 10px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+}
+
+.close-button {
+    background: #ee606a;
+    color: @noti-bg;
+    text-shadow: none;
+    padding: 0;
+    border-radius: 6px;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.close-button:hover {
+    box-shadow: none;
+    background: #ee606a;
+    transition: all .15s ease-in-out;
+    border: none
+}
+
+
+.notification-action {
+    border: none;
+    border-top: none;
+    border-radius: 6px;
+}
+
+
+.notification-default-action:hover,
+.notification-action:hover {
+    color: @text-color;
+    background: @noti-bg
+}
+
+
+.notification-default-action {
+    border-radius: 6px;
+    margin: 5px;
+}
+
+.notification-default-action:not(:only-child) {
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px
+}
+
+.notification-action:first-child {
+    border-bottom-left-radius: 10px;
+    background: @noti-bg
+}
+
+.notification-action:last-child {
+    border-bottom-right-radius: 10px;
+    background: @noti-bg-alt
+}
+
+.inline-reply {
+    margin-top: 8px
+}
+
+.inline-reply-entry {
+    background: @noti-bg;
+    color: @text-color;
+    caret-color: @text-color;
+    border: none;
+    border-radius: 6px
+}
+
+.inline-reply-button {
+	font-size: 0.5rem;
+    margin-left: 4px;
+    background: @noti-bg;
+    border: none;
+    border-radius: 6px;
+    color: @text-color
+}
+
+.inline-reply-button:disabled {
+    background: initial;
+    color: @text-color;
+    border: 1px solid transparent
+}
+
+.inline-reply-button:hover {
+    background: @noti-bg-hover
+}
+
+.body-image {
+    margin-top: 6px;
+    color: @text-color;
+    border-radius: 6px
+}
+
+.summary {
+    font-size: 1rem;
+    font-weight: 600;
+    background: transparent;
+    color: #ffffff;
+    text-shadow: none
+}
+
+.time {
+    font-size: 0.85rem;
+    font-weight: normal;
+    background: transparent;
+    color: #7a8478;
+    text-shadow: none;
+    margin-right: 18px
+}
+
+.body {
+    font-size: 0.9rem;
+    font-weight: normal;
+    background: transparent;
+    color: @text-color;
+    text-shadow: none
+}
+
+.control-center {
+    background: @noti-bg;
+    border: none;
+	color: @text-color;
+    border-radius: 8px;
+}
+
+.control-center-list {
+    background: transparent
+}
+
+.control-center-list-placeholder {
+    opacity: 0.5
+}
+
+.floating-notifications {
+    background: transparent;
+}
+
+.blank-window {
+    background: alpha(black, 0.1)
+}
+
+.widget-title {
+    color: @text-color;
+    background: @noti-bg-alt;
+    padding: 3px 6px;
+    margin: 5px;
+    font-size: 1rem;
+    border-radius: 6px;
+}
+
+.widget-title>button {
+    font-size: 0.75rem;
+    color: @text-color;
+    border-radius: 6px;
+	background: transparent;
+	border: none;
+}
+
+/* clear button */
+.widget-title>button:hover {
+    background: #ee606a;
+    color: @noti-bg;
+}
+
+.widget-dnd {
+    background: @noti-bg-alt;
+    padding: 3px 6px;
+    margin: 5px;
+    border-radius: 6px;
+    font-size: 0.5rem;
+    color: @text-color;
+}
+
+/* Interruptor: gris = apagado, naranja = encendido */
+.widget-dnd>switch {
+    border-radius: 6px;
+    border: none;
+    background: #4a555b;
+}
+
+.widget-dnd>switch:checked {
+    background: @noti-border-color;
+    border: none;
+}
+
+.widget-dnd>switch slider {
+    background: #d3c6aa;
+    border-radius: 6px
+}
+
+.widget-dnd>switch:checked slider {
+    background: @noti-bg;
+    border-radius: 6px
+}
+
+.widget-label {
+    margin: 5px;
+}
+
+.widget-label>label {
+    font-size: 1rem;
+    color: @text-color;
+}
+
+.widget-mpris {
+    color: @text-color;
+    background: @noti-bg;
+    padding: 3px 6px;
+    margin: 5px;
+    border-radius: 6px;
+}
+
+.widget-mpris > box > button {
+    border-radius: 6px;
+}
+
+.widget-mpris-player {
+    padding: 3px 6px;
+    margin: 5px;
+}
+
+.widget-mpris-title {
+    font-weight: 600;
+    font-size: 1rem
+}
+
+.widget-mpris-subtitle {
+    font-size: 0.75rem
+}
+
+.widget-buttons-grid {
+    font-size: large;
+	color: @noti-border-color;
+    padding: 2px;
+    margin: 5px;
+    border-radius: 6px;
+    background: @noti-bg-alt;
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button {
+    margin: 1px;
+    background: @noti-bg;
+    border-radius: 6px;
+    color: @text-color
+}
+
+/* individual buttons */
+.widget-buttons-grid>flowbox>flowboxchild>button:hover {
+    background: @noti-border-color;
+    color: @noti-bg
+}
+
+.widget-menubar>box>.menu-button-bar>button {
+    border: none;
+    background: transparent
+}
+
+.topbar-buttons>button {
+    border: none;
+    background: transparent
+}
+
+.widget-volume {
+    background: @noti-bg-alt;
+    padding: 2px;
+    margin: 10px 10px 5px 10px;
+    border-radius: 6px;
+    font-size: x-large;
+    color: @text-color
+}
+
+.widget-volume>box>button {
+    background: transparent;
+    color: @noti-border-color;
+    border: none
+}
+
+/* Slider en el naranja de acento */
+.widget-volume trough {
+    background: #4a555b;
+    border-radius: 6px;
+    min-height: 4px;
+}
+
+.widget-volume trough highlight {
+    background: @noti-border-color;
+    border-radius: 6px;
+}
+
+.widget-volume trough slider {
+    background: #d3c6aa;
+    border: none;
+    box-shadow: none;
+}
+
+.per-app-volume {
+    background-color: @noti-bg;
+    padding: 4px 8px 8px;
+    margin: 0 8px 8px;
+    border-radius: 6px;
+	color: @text-color
+}
+
+.widget-backlight {
+    background: @noti-bg-alt;
+    padding: 5px;
+    margin: 10px 10px 5px 10px;
+    border-radius: 6px;
+    font-size: x-large;
+    color: @text-color
+}
