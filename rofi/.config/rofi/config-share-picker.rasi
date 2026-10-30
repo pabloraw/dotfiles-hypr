@@ -1,0 +1,26 @@
+/* Selector de compartir pantalla (xdph custom_picker_binary) */
+
+@import "~/.config/rofi/config.rasi"
+
+mainbox {
+  children: [ "inputbar", "listview" ];
+}
+
+window {
+  width: 45%;
+}
+
+entry {
+  placeholder: "Elige pantalla, región o ventana para compartir";
+}
+
+listview {
+  columns: 1;
+  lines: 8;
+  fixed-height: false;
+  scrollbar: false;
+}
+
+element-icon {
+  size: 24px;
+}
