@@ -129,12 +129,18 @@ shotswappy() {
 
 shotsatty() {
 	tmpfile=$(mktemp /tmp/screenshot-XXXX.png)
+	outfile="$dir/$file"
 	grim -g "$(slurp)" "$tmpfile" && "$HOME/.cargo/bin/satty" -f "$tmpfile" \
-		--copy-command wl-copy \
-		--output-filename "$dir/$file" \
+		--output-filename "$outfile" \
+		--save-after-copy \
 		--disable-notifications \
 		--early-exit
 	rm -f "$tmpfile"
+	# satty no mantiene el portapapeles tras --early-exit en Hyprland;
+	# copiamos el resultado guardado desde el shell, donde wl-copy se demoniza bien
+	if [[ -f "$outfile" ]]; then
+		wl-copy < "$outfile"
+	fi
 }
 
 if [[ ! -d "$dir" ]]; then
